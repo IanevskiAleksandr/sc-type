@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>sc-type</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  
+    <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Load d3.js and plugin for color scale -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-contour.v1.min.js"></script>
+  
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" >
+          <img class="fas fa-laugh-wink" style="width:2rem!important; position: relative;" src="./logo.png" />
+        <div class="sidebar-brand-text mx-3">sc-type</div>
+      </a>
+
+	  <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+	  
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+	  <!-- Heading -->
+      <div class="sidebar-heading">
+        Data processing
+      </div>
+	  
+	  <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="upload.html">
+          <i class="fas fa-fw fa-upload"></i>
+          <span>Upload</span></a>
+      </li>
+	  
+	  <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="qualitycontrol.html">
+          <i class="fas fa-fw fa-check-double"></i>
+          <span>Quality control</span></a>
+      </li>
+	  
+
+	  <!-- Divider -->
+      <hr class="sidebar-divider">
+	  
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Visualization
+      </div>
+	  
+	  <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="results.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Scatterplot</span></a>
+      </li>
+
+	  <li class="nav-item">
+        <a class="nav-link" href="results.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Heatmap</span></a>
+      </li>
+	  
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        User
+      </div>
+	  
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-list-ul"></i>
+          <span>Examples</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Human:</h6>
+            <a class="collapse-item" target="_blank" href="./livercellatlass/qualitycontrol.html">Liver cell atlas</a>
+            <a class="collapse-item" target="_blank" href="./pbmc/qualitycontrol.html">PBMC (3k)</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">1</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">August 1, 2019</div>
+                    <span class="font-weight-bold">Welcome to sc-type application! For more information read ...</span>
+                  </div>
+                </a>
+               
+          
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Test user</span>
+                <img class="img-profile rounded-circle" src="https://img.icons8.com/clouds/2x/user.png">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+			<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+            <a href="results.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="cursor: pointer;">Clustering and cell type annotation <i class="fas fa-arrow-right text-white-50"></i></a>
+          </div>
+ 
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-7 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Cell-based statistics</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Export options:</div>
+                      <a class="dropdown-item" href="#" onclick="saveSvgAsPng(document.getElementById('clustid'), 'scatterplot.png', {scale: 7, backgroundColor:'white'});return false;">Export as *.png</a>
+                      <a class="dropdown-item" style="cursor: not-allowed;" href="#">Export as *.svg</a>
+					  <div class="dropdown-divider"></div>
+					  <a class="dropdown-item" style="cursor: not-allowed;" href="#">Report an error</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+					<div>
+						<!-- Create a div where the graph will take place -->
+						<div id="my_dataviz"></div> 
+					</div>
+					<div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-5 col-lg-6">
+			
+			
+					<div class="col-xl-12 col-lg-12">
+					
+					  <div class="card shadow mb-4">
+						<!-- Card Header - Dropdown -->
+						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						  <h6 class="m-0 font-weight-bold text-primary">Gene-based statistics</h6>
+						  <div class="dropdown no-arrow">
+							<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+							  <div class="dropdown-header">Export options:</div>
+							  <a class="dropdown-item" href="#" style="cursor: not-allowed;">Export as *.png</a>
+							  <a class="dropdown-item" href="#" style="cursor: not-allowed;">Export as *.svg</a>
+							  <div class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#" style="cursor: not-allowed;">Report an error</a>
+							</div>
+						  </div>
+						</div>
+						<!-- Card Body -->
+						<div class="card-body">
+							
+						<div class="chart-area2">
+							<div>
+								<!-- Create a div where the graph will take place -->
+								<div id="my_dataviz2"></div> 
+							</div>
+						</div>
+
+						
+						</div>			
+					  </div>			  
+					</div> 
+					
+	            </div>
+          </div>
+		  
+		  
+		  
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; sctype.fimm.fi <span id="year">2019</span></span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+   <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <div id="tooltip" class="hidden">
+        <p><span id="value"></p>
+	</div>
+</body>
+
+<script>
+	
+function onlyUnique(a,b,c){return c.indexOf(a)===b};
+function updateExcludedCells(d,e,f){var b=[];data_m.forEach(function(a){a.y_>f&&b.push(a.x_)});var c=[];data_u.forEach(function(a){(a.y_>d||a.y_<e)&&c.push(a.x_)});excl_cells=b.concat(c).filter(onlyUnique)};
+function dragged_m(a){d3.select(this).attr("y",d3.event.y-10);svg_m_line.attr("y1",d3.event.y).attr("y2",d3.event.y);0===Math.floor(3*Math.random())&&updatedotplots()}
+function dragged_u1(a){d3.select(this).attr("y",d3.event.y-10);svg_u_line1.attr("y1",d3.event.y).attr("y2",d3.event.y);0===Math.floor(3*Math.random())&&updatedotplots()}
+function dragged_u2(a){d3.select(this).attr("y",d3.event.y-10);svg_u_line2.attr("y1",d3.event.y).attr("y2",d3.event.y);0===Math.floor(3*Math.random())&&updatedotplots()}
+function dragended_m(a){d3.select(this).attr("y",d3.event.y-10);svg_m_line.attr("y1",d3.event.y).attr("y2",d3.event.y);updatedotplots()}function dragended_u1(a){d3.select(this).attr("y",d3.event.y-10);svg_u_line1.attr("y1",d3.event.y).attr("y2",d3.event.y);updatedotplots()}
+function dragended_u2(a){d3.select(this).attr("y",d3.event.y-10);svg_u_line2.attr("y1",d3.event.y).attr("y2",d3.event.y);updatedotplots()}
+function updatedotplots(){updateExcludedCells(c_u.invert(svg_u_line1.attr("y1")),c_u.invert(svg_u_line2.attr("y1")),c_m.invert(svg_m_line.attr("y1")));svg_m_points.style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_m(a.y_):"#808080"});svg_u_points.style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_u(a.y_):"#808080"});svg_c_points.style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_c(a.y_):"#808080"})};		
+var data;
+$(document).ready(function() {
+    $.getJSON('input.json', function(a) {
+	
+		//Scatterplot
+	var width = $(".chart-area").width()/3,	height = width*1.5;
+	$(".chart-area").height(height);
+        data = a;
+        dataQC = data.jsonQC, data_treshold = data.json_tresh;
+		data_c = dataQC.filter(function(i){return i.z_ === "c_"}), dt_c = data_c.map(function(i){ return i.y_;}), data_cmax = Math.max.apply(null, dt_c), data_cmin = Math.min.apply(null, dt_c)
+		data_u = dataQC.filter(function(i){return i.z_ === "u_"}), dt_u = data_u.map(function(i){ return i.y_;}), data_umax = Math.max.apply(null, dt_u), data_umin = Math.min.apply(null, dt_u);
+		data_m = dataQC.filter(function(i){return i.z_ === "m_"}), dt_m = data_m.map(function(i){ return i.y_;}), data_mmax = Math.max.apply(null, dt_m); data_mmin = Math.min.apply(null, dt_m);
+		cols_cum = ["#2166ac", "#4393c3", "#92c5de", "#d1e5f0", "#f7f7f7", "#fddbc7", "#f4a582", "#d6604d"];
+
+excl_cells = []; updateExcludedCells(data_treshold[0].nFeature_RNAup, data_treshold[0].nFeature_RNAdown, data_treshold[0].percent_mt);
+
+svg_u=d3.select("#my_dataviz").append("svg").attr("width",width).attr("height",height).append("g").attr("transform","translate("+width*.25+","+height*.1+")"),c_u=d3.scaleLinear().domain([data_umin-data_umax*0.025,1.05*data_umax]).range([height*0.8,0]);
+	svg_u.append("g").call(d3.axisLeft(c_u));d=d3.scaleBand().range([0,width*0.5]).domain(["u_"]);svg_u.append("g").attr("transform","translate(0,"+(height*0.8)+")").call(d3.axisBottom(d));
+	m=d3.histogram().domain(c_u.domain()).thresholds(c_u.ticks(100)).value(function(b){return b}),
+	    g=d3.nest().key(function(b){return b.z_}).rollup(function(b){input=b.map(function(b){return b.y_});return bins=m(input)}).entries(data_u),
+		f=0;for(i in g)allBins=g[i].value,lengths=allBins.map(function(b){return b.length}),longuest=d3.max(lengths),longuest>f&&(f=longuest);
+	l=d3.scaleLinear().range([0,d.bandwidth()]).domain([-f,f]),n_u=d3.scaleQuantile().domain(dt_u).range(cols_cum);
+	svg_u.selectAll("myViolin").data(g).enter().append("g").attr("transform",function(b){return"translate("+(d(b.key)+2)+" ,0)"})
+	 .append("path").datum(function(b){return b.value}).style("stroke","#000000").style("stroke-width","0.25").style("fill","#A9A9A9").attr("d",d3.area().x0(l(0)).x1(function(b){return l(b.length)})
+				    .y(function(b){return c_u(b.x0)}).curve(d3.curveBasis));
+	svg_u_points = svg_u.selectAll("indPoints").data(data_u).enter().append("circle").attr("cx",function(b){return d(b.z_)+d.bandwidth()/2-(width*0.2)*Math.random()}).attr("cy",function(b){return c_u(b.y_)}).attr("r",5)
+	     .style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_u(a.y_):"#808080"}).attr("stroke","#F5F5F5");
+	svg_u.append("text").attr("x",(width/4)).attr("y",-(parseInt(width/18)*1.5)).attr("text-anchor","middle").style("font-size",(parseInt(width/18)+"px")).style("font-weight","bold").text("Detected genes");
+	svg_u_line1 = svg_u.append("line").attr("class","d3-dp-line").attr("x1",0).attr("y1",c_u(Math.min(data_treshold[0].nFeature_RNAup,data_umax))).attr("x2",width*0.5).attr("y2",c_u(Math.min(data_treshold[0].nFeature_RNAup,data_umax)))
+		 .style("stroke-dasharray","3, 3").style("stroke-opacity",.9).style("stroke-width",2).style("stroke","#000000");
+	svg_u_line2 = svg_u.append("line").attr("class","d3-dp-line").attr("x1",0).attr("y1",c_u(Math.max(data_treshold[0].nFeature_RNAdown,data_umin))).attr("x2",width*0.5).attr("y2",c_u(Math.max(data_treshold[0].nFeature_RNAdown,data_umin)))
+		 .style("stroke-dasharray","3, 3").style("stroke-opacity",.9).style("stroke-width",2).style("stroke","#000000");
+	svg_u.append("rect").attr("class","pointer_").attr("x",0).attr("y",c_u(Math.min(data_treshold[0].nFeature_RNAup,data_umax))-10).attr("width",width*0.5).attr("height",20)
+		 .attr("fill","green").attr("opacity",.05).call(d3.drag().on("drag",dragged_u1).on("end",dragended_u1));
+	svg_u.append("rect").attr("class","pointer_").attr("x",0).attr("y",c_u(Math.max(data_treshold[0].nFeature_RNAdown,data_umin))-10).attr("width",width*0.5).attr("height",20)
+		 .attr("fill","green").attr("opacity",.05).call(d3.drag().on("drag",dragged_u2).on("end",dragended_u2));
+
+		 /*
+		 
+		 .on("mouseover",function(b,e){ //d,b
+				var a=d3.select(".dtr."+b.cellnames); var c=+a.attr("cx"),d=+a.attr("cy");a=a.style("fill");
+					d3.select("#tooltip").style("left",d3.event.pageX+25+"px").style("top",d3.event.pageY-95+"px").select("#value")
+										 .html("Cell: <b>"+b.cellnames+"</b><br>Cluster: <b>"+b.cluster+"</b>");
+					d3.select("#tooltip").classed("hidden",!1);
+					wrapper.append("line").attr("class","guide").attr("x1",c).attr("x2",c).attr("y1",d).attr("y2",height+20).style("stroke",a).style("opacity",0).transition().duration(100).style("opacity",.5);
+					wrapper.append("text").attr("class","guide").attr("x",c).attr("y",height+38).style("fill",a).style("opacity",0).style("text-anchor","middle").text(d3.format(".2s")(b.UMAP_1)).transition().duration(100).style("opacity",.5);
+					wrapper.append("line").attr("class","guide").attr("x1",c).attr("x2",-20).attr("y1",d).attr("y2",d).style("stroke",a).style("opacity",0).transition().duration(100).style("opacity",.5);
+					wrapper.append("text").attr("class","guide").attr("x",-25).attr("y",d).attr("dy","0.35em").style("fill",a).style("opacity",0).style("text-anchor","end").text(d3.format(".1f")(b.UMAP_2)).transition().duration(100).style("opacity",.5)
+					changedrawbarplot(("Cluster: "+b.cluster), true);
+			})
+			.on("mouseout",function(b,c){
+				d3.select("#tooltip").classed("hidden",!0);
+				d3.selectAll(".guide").transition().duration(100).style("opacity",0).remove();
+			});
+			
+			*/
+		 
+		 
+svg_c=d3.select("#my_dataviz").append("svg").attr("width",width).attr("height",height).append("g").attr("transform","translate("+width*.25+","+height*.1+")"),c=d3.scaleLinear().domain([data_cmin-data_cmax*0.025,1.05*data_cmax]).range([height*0.8,0]);
+	svg_c.append("g").call(d3.axisLeft(c));d=d3.scaleBand().range([0,width*0.5]).domain(["c_"]).padding(.1);svg_c.append("g").attr("transform","translate(0,"+(height*0.8)+")").call(d3.axisBottom(d));
+	m=d3.histogram().domain(c.domain()).thresholds(c.ticks(100)).value(function(b){return b}),
+	    g=d3.nest().key(function(b){return b.z_}).rollup(function(b){input=b.map(function(b){return b.y_});return bins=m(input)}).entries(data_c),
+		f=0;for(i in g)allBins=g[i].value,lengths=allBins.map(function(b){return b.length}),longuest=d3.max(lengths),longuest>f&&(f=longuest);
+	l=d3.scaleLinear().range([0,d.bandwidth()]).domain([-f,f]),n_c=d3.scaleQuantile().domain(dt_c).range(cols_cum);//d3.scaleSequential(function(a){return d3.interpolateRdBu(d3.scaleLog().domain([1.01*data_cmax,.99*data_cmin])(a))});//n=d3.scaleSequential(d3.interpolateRdBu).domain([1.01*data_cmax,data_cmin*0.99]);
+	svg_c.selectAll("myViolin").data(g).enter().append("g").attr("transform",function(b){return"translate("+(d(b.key)+2)+" ,0)"})
+	 .append("path").datum(function(b){return b.value}).style("stroke","#000000").style("stroke-width","0.25").style("fill","#A9A9A9").attr("d",d3.area().x0(l(0)).x1(function(b){return l(b.length)})
+				    .y(function(b){return c(b.x0)}).curve(d3.curveBasis));
+	svg_c_points = svg_c.selectAll("indPoints").data(data_c).enter().append("circle").attr("cx",function(b){return d(b.z_)+d.bandwidth()/2-(width*0.2)*Math.random()}).attr("cy",function(b){return c(b.y_)}).attr("r",5)
+		 .style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_c(a.y_):"#808080"}).attr("stroke","#F5F5F5");
+	svg_c.append("text").attr("x",(width/4)).attr("y",-(parseInt(width/18)*1.5)).attr("text-anchor","middle").style("font-size",(parseInt(width/18)+"px")).style("font-weight","bold").text("Read counts");//RNA count
+
+
+svg_m=d3.select("#my_dataviz").append("svg").attr("width",width).attr("height",height).append("g").attr("transform","translate("+width*.25+","+height*.1+")"),c_m=d3.scaleLinear().domain([data_mmin-data_mmax*0.025,1.05*data_mmax]).range([height*0.8,0]);
+	svg_m.append("g").call(d3.axisLeft(c_m));d=d3.scaleBand().range([0,width*0.5]).domain(["m_"]).padding(.1);svg_m.append("g").attr("transform","translate(0,"+(height*0.8)+")").call(d3.axisBottom(d));
+	m=d3.histogram().domain(c_m.domain()).thresholds(c_m.ticks(100)).value(function(b){return b}),
+	    g=d3.nest().key(function(b){return b.z_}).rollup(function(b){input=b.map(function(b){return b.y_});return bins=m(input)}).entries(data_m),
+		f=0;for(i in g)allBins=g[i].value,lengths=allBins.map(function(b){return b.length}),longuest=d3.max(lengths),longuest>f&&(f=longuest);
+	l=d3.scaleLinear().range([0,d.bandwidth()]).domain([-f,f]),n_m=d3.scaleQuantile().domain(dt_m).range(cols_cum);
+	svg_m.selectAll("myViolin").data(g).enter().append("g").attr("transform",function(b){return"translate("+(d(b.key)+2)+" ,0)"})
+	 .append("path").datum(function(b){return b.value}).style("stroke","#000000").style("stroke-width","0.25").style("fill","#A9A9A9").attr("d",d3.area().x0(l(0)).x1(function(b){return l(b.length)})
+				    .y(function(b){return c_m(b.x0)}).curve(d3.curveBasis));
+	svg_m_points = svg_m.selectAll("indPoints").data(data_m).enter().append("circle").attr("cx",function(b){return d(b.z_)+d.bandwidth()/2-(width*0.2)*Math.random()}).attr("cy",function(b){return c_m(b.y_)}).attr("r",5)
+		 .style("fill",function(a){return-1===excl_cells.indexOf(a.x_)?n_m(a.y_):"#808080"}).attr("stroke","#F5F5F5");
+	svg_m.append("text").attr("x",(width/4)).attr("y",-(parseInt(width/18)*1.5)).attr("text-anchor","middle").style("font-size",(parseInt(width/18)+"px")).style("font-weight","bold").text("Mitochondrial gene %");
+	svg_m_line = svg_m.append("line").attr("class","d3-dp-line").attr("x1",0).attr("y1",c_m(Math.min(data_treshold[0].percent_mt,data_mmax))).attr("x2",130).attr("y2",c_m(Math.min(data_treshold[0].percent_mt,data_mmax)))
+	     .style("stroke-dasharray","3, 3").style("stroke-opacity",.9).style("stroke-width",2).style("stroke","#000000").style("color", "red")
+	svg_m.append("rect").attr("class","pointer_").attr("x",0).attr("y",c_m(Math.min(data_treshold[0].percent_mt,data_mmax))-10).attr("width",130).attr("height",20)
+		 .attr("fill","green").attr("opacity",.05).call(d3.drag().on("drag",dragged_m).on("end",dragended_m));
+		
+		
+		
+
+							
+// set the dimensions and margins of the graph
+//margin = {top: 10, right: 30, bottom: 50, left: 100},
+//    width = 520 - margin.left - margin.right,
+//    height = 400 - margin.top - margin.bottom;
+	
+//Scatterplot
+var width = $(".chart-area2").width()*.8, margin = {top: 0, right: width*.15, bottom: height*0.1, left: width*.1};
+$(".chart-area2").height(height);
+
+// append the svg object to the body of the page
+svgVST=d3.select("#my_dataviz2").append("svg").attr("width",width+margin.left+margin.right).attr("height",height).append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+
+// read data
+dataVST = data.jsonVST;
+all_x = dataVST.map(function(a){return a.x?a.x:0;}), all_y = dataVST.map(function(a){return a.y?a.y:0;});
+
+
+// Add X axis
+x=d3.scaleLinear().domain([Math.floor(Math.min.apply(null,all_x)),Math.ceil(Math.max.apply(null,all_x))]).range([0,width]),y=d3.scaleLinear().domain([0,Math.ceil(Math.max.apply(null,all_y))]).range([(height-margin.bottom),0]);
+	
+
+		   // Add points
+  svgVST.append("g")
+    .selectAll("circle")
+    .data(dataVST)
+    .enter()
+    .append("circle")
+      .attr("r", 5)
+      .attr("fill", function(d){ return (d.c_ == 1)?"#1f78b4":"#a6cee3";})
+      .attr("cx", function(d){ return x(d.x);})
+      .attr("cy", function(d){return y(d.y);}).attr("stroke","#F5F5F5")
+	  
+	  
+		  	  
+
+densityData = d3.contourDensity()
+    .x(function(d) { return x(d.x); })   // x and y = column name in .csv input data
+    .y(function(d) { return y(d.y); })
+    .size([width, (height-margin.bottom)])
+    .bandwidth(20)    // smaller = more precision in lines = more lines
+    (dataVST)
+
+  // Add the contour: several "path"
+  svgVST.append("g")
+    .selectAll("path")
+    .data(densityData)
+    .enter()
+    .append("path")
+      .attr("d", d3.geoPath())
+      .attr("fill", "none")
+      .attr("stroke", "#D3D3D3")
+      .attr("stroke-linejoin", "round")
+	  
+	  
+	 	svgVST.append("rect").attr('class', 'rect1').attr("x", 0)
+        .attr("y", (height-margin.bottom)).attr("width", width).attr("height", margin.bottom).attr("fill", "#ffffff")
+
+
+	  	  svgVST.append("g")
+    .attr("transform", "translate(0," + (height-margin.bottom) + ")")
+    .call(d3.axisBottom(x));
+  svgVST.append("g")
+    .call(d3.axisLeft(y));
+	
+// Handmade legend
+svgVST.append("circle").attr("cx", 20).attr("cy",20).attr("r", 4).style("fill", "#1f78b4")
+svgVST.append("circle").attr("cx", 20).attr("cy",40).attr("r", 4).style("fill", "#a6cee3")
+svgVST.append("text").attr("x", 30).attr("y", 20).text("Variable genes").style("font-size", "14px").attr("alignment-baseline","middle")
+svgVST.append("text").attr("x", 30).attr("y", 40).text("Non-variable genes").style("font-size", "14px").attr("alignment-baseline","middle")
+
+
+// Add X axis label:
+svgVST.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", width/2)
+    .attr("y", height - (parseInt(height/40)))
+    .text("Average Expression").style("font-size",(parseInt(width/33)+"px"));
+
+// Y axis label:
+svgVST.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -parseInt(width/16))
+    .attr("x", -height/2)
+    .text("Standardized Variance").style("font-size",(parseInt(width/33)+"px"));
+	
+	/*
+	*/
+    });
+});
+
+	
+	$(document).ready(function() {
+	  document.getElementById("year").innerHTML = new Date().getFullYear();
+	});
+
+	
+	
+</script>
+
+</html>
