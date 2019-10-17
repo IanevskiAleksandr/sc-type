@@ -1,5 +1,5 @@
 
-# DECREASE: a method for accurate Drug Combination RESponse prEdictions
+# ScType: Fully-automated cell identification by means of cell type-specific markers extracted from single-cell RNA-seq data
 
 
 <a href="https://synergyfinder.fimm.fi"><img style="width:15%" width = "15%" src="https://cdn.rawgit.com/IanevskiAleksandr/DECREASE/72b74b51/www/logo.png" align="left" hspace="10" vspace="6"></a>
