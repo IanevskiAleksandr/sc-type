@@ -9,7 +9,7 @@
 <p style="text-align:justify;"> <b>ScType</b> a computational method for automated selection of marker genes based merely on scRNA-seq data <a href="https://github.com/IanevskiAleksandr/DECREASE/archive/master.zip">here</a>. The open-source portal (http://sctype.fimm.fi) provides an interactive web-implementation of the method.</p>
 
 ##
-
+<br><br>
 
 ![alt text](https://github.com/IanevskiAleksandr/sc-type/blob/master/preview.png)
 
