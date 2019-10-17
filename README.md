@@ -11,13 +11,11 @@
 ##
 
 
-![alt text](https://cdn.rawgit.com/IanevskiAleksandr/DECREASE/49e1e8f9/www/main.png)
+![alt text](https://github.com/IanevskiAleksandr/sc-type/blob/master/preview.png)
 
 
 For any questions please contact **Aleksandr Ianevski** [@IanevskiAleksandr](aleksandr.ianevski@helsinki.fi)
 
 ## Copyright and license
 
-Code copyright 2019 DECREASE
-
-Licence [https://github.com/IanevskiAleksandr/DECREASE/blob/master/LICENSE]
+Code copyright 2019 ScType
