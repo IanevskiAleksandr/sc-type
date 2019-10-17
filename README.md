@@ -6,7 +6,7 @@
 
 **Article**: [to be filled]
 
-<p style="text-align:justify;"> <b>DECREASE</b> an efficient machine learning-based method that requires only a limited set of pairwise dose-response measurements to enable accurate synergy predictions, hence drastically reducing the time and resources needed in high-throughput combinatorial screening. The public version of web application (https://decrease.fimm.fi) is hosted by Open Source Shiny Server and its implementation is available <a href="https://github.com/IanevskiAleksandr/DECREASE/archive/master.zip">here</a>. The source code of DECREASE model with an example can be found <a href="https://github.com/IanevskiAleksandr/DECREASE/tree/master/DECREASE_model_example">here</a>.</p>
+<p style="text-align:justify;"> <b>ScType</b> a computational method for automated selection of marker genes based merely on scRNA-seq data <a href="https://github.com/IanevskiAleksandr/DECREASE/archive/master.zip">here</a>. The open-source portal (http://sctype.fimm.fi) provides an interactive web-implementation of the method.</p>
 
 ##
 
