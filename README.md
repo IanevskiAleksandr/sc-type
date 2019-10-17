@@ -13,6 +13,7 @@
 
 ![alt text](https://github.com/IanevskiAleksandr/sc-type/blob/master/preview.png)
 
+<br><br>
 
 For any questions please contact **Aleksandr Ianevski** [@IanevskiAleksandr](aleksandr.ianevski@helsinki.fi)
 
