@@ -2,7 +2,7 @@
 # ScType: Fully-automated cell identification by means of cell type-specific markers extracted from single-cell RNA-seq data
 
 
-<a href="https://synergyfinder.fimm.fi"><img style="width:15%" width = "15%" src="" align="left" hspace="10" vspace="6"></a>
+<a href="https://synergyfinder.fimm.fi"><img style="width:15%" width = "15%" src="https://github.com/IanevskiAleksandr/sc-type/blob/master/logosctype.png" align="left" hspace="10" vspace="6"></a>
 
 **Article**: [to be filled]
 
