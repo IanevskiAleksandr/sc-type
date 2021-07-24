@@ -54,5 +54,3 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2, marker_sensitivity,
   
   cL_resutls
 }
-{"mode":"full","isActive":false}
-{"mode":"full","isActive":false}
