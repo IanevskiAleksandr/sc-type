@@ -49,7 +49,7 @@ pbmc <- RunUMAP(pbmc, dims = 1:10)
 DimPlot(pbmc, reduction = "umap")
 ```
 ![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png)
-
+<br>
 Now, let's automatically assign cell types using ScType. For that, we first load 2 additional ScType functions:
 
 ```R
