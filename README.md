@@ -100,12 +100,8 @@ for(j in unique(cL_resutls$cluster)){
 
 DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')        
 
-![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png)
 ```
-
-
-
-
+![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png)
 
 
 <br><br>
