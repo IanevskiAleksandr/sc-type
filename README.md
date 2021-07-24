@@ -74,11 +74,17 @@ gs_list = gene_sets_prepare(db_, tissue)
 
 ```
 
+<br>
+Finally, let's assign cell types to each cluster:
 
-# and assign cell types
+```R
 cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
                       gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
                       marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
+head(cL_resutls)                 
+```
+
+
 
 
 <br><br>
