@@ -15,7 +15,7 @@
 
 ### Annotation example 
 
-First let's load a PBMC 3k example dataset (see Seurat tutorial for more details, https://satijalab.org/seurat/articles/pbmc3k_tutorial.html)
+First let's load a PBMC 3k example dataset (see Seurat tutorial for more details on how to load the dataset using Seurat, https://satijalab.org/seurat/articles/pbmc3k_tutorial.html). The raw data can be found <a href='https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz' download>here</a>.
 
 ```R
 # load libraries
