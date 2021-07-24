@@ -56,7 +56,7 @@ Now, let's automatically assign cell types using ScType. For that we first load 
 # load gene set preparation function
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
 # load cell type annotation function
-source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_func")
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_func.R")
 
 ```
 
