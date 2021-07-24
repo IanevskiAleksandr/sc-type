@@ -118,4 +118,4 @@ For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@hels
 
 ## Copyright and license
 
-Code copyright 2021 ScType
+Code copyright 2021 ScType, https://github.com/IanevskiAleksandr/sc-type/blob/master/LICENSE
