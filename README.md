@@ -11,7 +11,7 @@
 ##
 <br><br>
 
-![alt text](https://github.com/IanevskiAleksandr/sc-type/blob/master/preview.png)
+![alt text](https://github.com/IanevskiAleksandr/sc-type/blob/master/ScTypePlan.png)
 
 <br><br>
 
