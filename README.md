@@ -105,6 +105,10 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 
 
 <br><br>
+sessionInfo();
+[1] patchwork_1.1.1         geneSynonym_1.7.21.5.23 HGNChelper_0.8.1        SeuratObject_4.0.2      Seurat_4.0.3           
+[6] dplyr_1.0.6            
+
 
 <br><br>
 
