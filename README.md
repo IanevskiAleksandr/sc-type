@@ -48,7 +48,7 @@ pbmc <- FindClusters(pbmc, resolution = 0.8)
 pbmc <- RunUMAP(pbmc, dims = 1:10)
 DimPlot(pbmc, reduction = "umap")
 ```
-
+![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png)
 
 Now, let's automatically assign cell types using ScType. For that we first load 2 additional ScType functions:
 
@@ -98,8 +98,12 @@ for(j in unique(cL_resutls$cluster)){
   }
 }
 
-DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')             
+DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')        
+
+![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png)
 ```
+
+
 
 
 
