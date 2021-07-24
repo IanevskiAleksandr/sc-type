@@ -108,7 +108,7 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 
 <br><br>
 
-For any questions please contact **Aleksandr Ianevski** [@IanevskiAleksandr](aleksandr.ianevski@helsinki.fi)
+For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
 
 ## Copyright and license
 
