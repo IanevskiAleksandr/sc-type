@@ -19,7 +19,7 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2, marker_sensitivity,
   gs2 = lapply(1:length(gs2), function(d_){ 
     GeneIndToKeep = rownames(scRNAseqData) %in% as.character(gs2[[d_]]); rownames(scRNAseqData)[GeneIndToKeep]})
   names(gs) = names_gs_cp; names(gs2) = names_gs_2_cp;
-  cell_markers_genes_score = marker_sensitivity[marker_sensitivity$gene_ %in% unique(unlist(gs_)),]
+  cell_markers_genes_score = marker_sensitivity[marker_sensitivity$gene_ %in% unique(unlist(gs)),]
   
   # z-scale if not
   if(!scaled) Z <- t(scale(t(Z))) else Z <- scRNAseqData
