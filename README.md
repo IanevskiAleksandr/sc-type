@@ -84,6 +84,25 @@ cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE
 head(cL_resutls)                 
 ```
 
+<br>
+We can also overlay the identified cell types on UMAP plot:
+
+```R
+pbmc@meta.data$customclassif = ""
+for(j in unique(cL_resutls$cluster)){
+  cl_type = cL_resutls[cL_resutls$cluster==j,]; cl_type = cl_type[order(cl_type$scores, decreasing = T), ]
+  if(cl_type$scores[1]>0){
+    pbmc@meta.data$customclassif[pbmc@meta.data$seurat_clusters == j] = as.character(cl_type$type[1])
+  } else {
+    pbmc@meta.data$customclassif[pbmc@meta.data$seurat_clusters == j] = "Unknown"
+  }
+}
+
+DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')             
+```
+
+
+
 
 
 
