@@ -16,4 +16,4 @@ For any questions please contact **Aleksandr Ianevski** [@IanevskiAleksandr](ale
 
 ## Copyright and license
 
-Code copyright 2019 ScType
+Code copyright 2021 ScType
