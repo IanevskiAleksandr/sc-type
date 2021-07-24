@@ -26,7 +26,6 @@ pbmc.data <- Read10X(data.dir = "./filtered_gene_bc_matrices/hg19/")
 # Initialize the Seurat object with the raw (non-normalized data).
 pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)
 ```
-<br>
 
 Next, let's normalize and cluster the data.
 
@@ -49,6 +48,19 @@ pbmc <- FindClusters(pbmc, resolution = 0.8)
 pbmc <- RunUMAP(pbmc, dims = 1:10)
 DimPlot(pbmc, reduction = "umap")
 ```
+
+
+Now, let's automatically assign cell types using ScType
+
+```R
+# load gene set preparation function
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
+# load cell type annotation function
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score.R")
+
+```
+
+
 
 <br><br>
 
