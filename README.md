@@ -81,7 +81,7 @@ Finally, let's assign cell types to each cluster:
 cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
                       gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
                       marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
-head(cL_resutls)                 
+cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
 
 <br>
@@ -100,8 +100,6 @@ for(j in unique(cL_resutls$cluster)){
 
 DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')             
 ```
-
-
 
 
 
