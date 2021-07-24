@@ -12,6 +12,23 @@
 
 <br><br>
 
+
+### Annotation example 
+
+First let's load a PBMC 3k example dataset (see Seurat tutorial for more details, https://satijalab.org/seurat/articles/pbmc3k_tutorial.html)
+
+```R
+# load libraries
+lapply(c("dplyr","Seurat","patchwork","HGNChelper","geneSynonym"), library, character.only = T)
+
+# Load the PBMC dataset
+pbmc.data <- Read10X(data.dir = "./filtered_gene_bc_matrices/hg19/")
+# Initialize the Seurat object with the raw (non-normalized data).
+pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)
+```
+
+<br><br>
+
 For any questions please contact **Aleksandr Ianevski** [@IanevskiAleksandr](aleksandr.ianevski@helsinki.fi)
 
 ## Copyright and license
