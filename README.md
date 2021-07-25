@@ -134,7 +134,7 @@ In addition, if the tissue type of dataset is unknown, ScType provides automated
 # load auto-detection function
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/auto_detect_tissue_type.R")
 
-# guess cell type
+# guess a tissue type
 tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE)       
 ```
 <br>
