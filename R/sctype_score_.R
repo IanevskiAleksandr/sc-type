@@ -8,16 +8,14 @@
 # @params: scale - indicates whether the matrix is scaled (TRUE by default)
 # @params: gs - list of gene sets positively expressed in the cell type 
 # @params: gs2 - list of gene sets negatively expressed in the cell type (NULL if not applicable)
-# @marker_sensitivity: dataframe of calculated marker sensitivity scores (NULL if not applicable)
 
-sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, marker_sensitivity = NULL, ...){
+sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
   
-  # check if marker sensitivity is provided
-  if(is.null(marker_sensitivity)){
-    marker_stat = sort(table(unlist(gs)), decreasing = T); 
-    marker_sensitivity = data.frame(score_marker_sensitivity = scales::rescale(as.numeric(marker_stat), to = c(0,1), from = c(length(gs),1)),
-                                        gene_ = names(marker_stat), stringsAsFactors = !1)
-  }
+  # marker sensitivity
+  marker_stat = sort(table(unlist(gs)), decreasing = T); 
+  marker_sensitivity = data.frame(score_marker_sensitivity = scales::rescale(as.numeric(marker_stat), to = c(0,1), from = c(length(gs),1)),
+                                      gene_ = names(marker_stat), stringsAsFactors = !1)
+
   
   # convert gene names to Uppercase
   rownames(scRNAseqData) = toupper(rownames(scRNAseqData));
