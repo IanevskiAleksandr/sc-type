@@ -110,8 +110,15 @@ Finally, let's assign cell types to each cluster:
 <br>
 
 ```R
-cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
+# get cell-type by cell matrix
+es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
                       gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+
+# merge by cluster
+cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
+    es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
+    head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
+}))
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
 
