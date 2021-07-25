@@ -77,6 +77,7 @@ DimPlot(pbmc, reduction = "umap")
 </p>
 
 <br><br>
+### Cell type assignment
 Now, let's <b>automatically assign cell types using ScType</b>. For that, we first load 2 additional ScType functions:
 <br>
 
@@ -148,7 +149,7 @@ sessionInfo();
 <br><br>
 <br>
 
-
+### Automatically detect a tissue type of the dataset
 In addition, if the tissue type of input dataset is unknown, ScType provides automated guessing of a tissue type.
 
 ```R
