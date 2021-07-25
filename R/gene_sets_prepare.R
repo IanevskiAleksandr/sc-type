@@ -46,14 +46,9 @@ gene_sets_prepare <- function(path_to_db_file, cell_type){
   
   cell_markers$geneSymbolmore1 = gsub("///",",",cell_markers$geneSymbolmore1);cell_markers$geneSymbolmore1 = gsub(" ","",cell_markers$geneSymbolmore1)
   cell_markers$geneSymbolmore2 = gsub("///",",",cell_markers$geneSymbolmore2);cell_markers$geneSymbolmore2 = gsub(" ","",cell_markers$geneSymbolmore2)
-  
-  cell_markers_genes_ = gsub(" ","",unlist(strsplit(toString(cell_markers$geneSymbolmore1),",")))
-  cell_markers_genes_ = sort(table(cell_markers_genes_), decreasing = T); 
-  cell_markers_genes_score = data.frame(score_marker_sensitivity = scales::rescale(as.numeric(cell_markers_genes_), to = c(0,1), from = c(nrow(cell_markers),1)),
-                                        gene_ = names(cell_markers_genes_), stringsAsFactors = !1)
-  
+   
   gs = lapply(1:nrow(cell_markers), function(j) gsub(" ","",unlist(strsplit(toString(cell_markers$geneSymbolmore1[j]),",")))); names(gs) = cell_markers$cellName
   gs2 = lapply(1:nrow(cell_markers), function(j) gsub(" ","",unlist(strsplit(toString(cell_markers$geneSymbolmore2[j]),",")))); names(gs2) = cell_markers$cellName
   
-  list(gs_positive = gs, gs_negative = gs2, marker_sensitivity = cell_markers_genes_score)
+  list(gs_positive = gs, gs_negative = gs2)
 }
