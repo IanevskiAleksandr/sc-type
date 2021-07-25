@@ -16,7 +16,7 @@
 ### Cell type annotation example 
 
 First let's load a PBMC 3k example dataset (see Seurat tutorial for more details on how to load the dataset using Seurat, https://satijalab.org/seurat/articles/pbmc3k_tutorial.html). The raw data can be found <a href='https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz' download>here</a>.
-
+<br>
 ```R
 # load libraries
 lapply(c("dplyr","Seurat","HGNChelper"), library, character.only = T)
@@ -28,7 +28,7 @@ pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3
 ```
 <br>
 Next, let's normalize and cluster the data.
-
+<br>
 ```R
 # normalize data
 pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
@@ -51,6 +51,7 @@ DimPlot(pbmc, reduction = "umap")
 ![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png)
 <br><br>
 Now, let's <b>automatically assign cell types using ScType</b>. <br>For that, we first load 2 additional ScType functions:
+<br>
 
 ```R
 # load gene set preparation function
@@ -62,7 +63,7 @@ source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sct
 <br>
 Next, let's prepare gene sets from the input cell marker file. By default, we use our in-built cell marker DB, however, feel free to use your own data.
 Just prepare an input XLSX file in the same format as <a href="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx">our DB file</a>. <i>DB file should contain four columns (tissueType - tissue type, cellName - cell type, geneSymbolmore1 - positive marker genes,	geneSymbolmore2 - marker genes not expected to be expressed by a cell type)</i>
-<br>In addition, provide a tissue type your data belongs to:
+<br><br>In addition, provide a tissue type your data belongs to:<br>
 
 ```R
 # DB file
@@ -76,7 +77,7 @@ gs_list = gene_sets_prepare(db_, tissue)
 
 <br>
 Finally, let's assign cell types to each cluster:
-
+<br>
 ```R
 cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
                       gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
@@ -86,7 +87,7 @@ cL_resutls %>% group_by(cluster) %>% top_n(n = 1)
 
 <br>
 We can also overlay the identified cell types on UMAP plot:
-
+<br>
 ```R
 pbmc@meta.data$customclassif = ""
 for(j in unique(cL_resutls$cluster)){
