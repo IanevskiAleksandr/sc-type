@@ -51,7 +51,7 @@ DimPlot(pbmc, reduction = "umap")
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png" style="width: 50%; height: 50%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png" style="width: 50%; height: 50%" height="50%" width="50%" />
 </p>
 
 <br><br>
@@ -114,7 +114,7 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png" style="width: 50%; height: 50%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png" style="width: 50%; height: 50%"  height="50%" width="50%" />
 </p>
 
 <br><br>
