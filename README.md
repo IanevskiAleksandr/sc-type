@@ -25,10 +25,10 @@ gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr
 
 # assign cell types
 scRNAseqData = readRDS('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'); #load example scRNA-seq matrix
-cL_resutls = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # get results
-cL_resutls %>% group_by(cluster) %>% top_n(n = 1) 
+es.max
 
 ```
 
