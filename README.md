@@ -49,7 +49,10 @@ pbmc <- FindClusters(pbmc, resolution = 0.8)
 pbmc <- RunUMAP(pbmc, dims = 1:10)
 DimPlot(pbmc, reduction = "umap")
 ```
-<div style="text-align:center">![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png)</div>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png" />
+</p>
 <br><br>
 Now, let's <b>automatically assign cell types using ScType</b>. For that, we first load 2 additional ScType functions:
 <br>
