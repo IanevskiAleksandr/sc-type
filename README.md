@@ -142,11 +142,10 @@ tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbm
   <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figTT.PNG" style="width: 60%; height: 60%"  height="60%" width="60%" />
 </p>
 <br>
-
 The highest summary score represents the most probable tissue type.
 
 
-
+<br>
 For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
 
 ## Copyright and license
