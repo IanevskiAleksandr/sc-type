@@ -139,16 +139,12 @@ tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbm
 ```
 <br>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figDB.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figTT.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
 </p>
 <br>
 
-```R
-cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
-                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
-                      marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
-cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
-```
+The highest summary score represents the most probable tissue type.
+
 
 
 For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
