@@ -174,7 +174,7 @@ The highest summary score represents the most probable tissue type.
 
 <br>
 <br>
-<br>
+
 ## Contact information
 For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
 
