@@ -39,7 +39,7 @@ pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
 pbmc <- ScaleData(pbmc, features = rownames(pbmc))
 pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
 
-# Check number of PC components
+# Check number of PC components (we selected 10 PCs for downstream analysis, based in Elbow plot)
 ElbowPlot(pbmc)
 
 # cluster and visualize
