@@ -19,7 +19,7 @@ First let's load a PBMC 3k example dataset (see Seurat tutorial for more details
 
 ```R
 # load libraries
-lapply(c("dplyr","Seurat","patchwork","HGNChelper","geneSynonym"), library, character.only = T)
+lapply(c("dplyr","Seurat","HGNChelper"), library, character.only = T)
 
 # Load the PBMC dataset
 pbmc.data <- Read10X(data.dir = "./filtered_gene_bc_matrices/hg19/")
