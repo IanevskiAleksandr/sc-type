@@ -16,7 +16,6 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
   marker_sensitivity = data.frame(score_marker_sensitivity = scales::rescale(as.numeric(marker_stat), to = c(0,1), from = c(length(gs),1)),
                                       gene_ = names(marker_stat), stringsAsFactors = !1)
 
-  
   # convert gene names to Uppercase
   rownames(scRNAseqData) = toupper(rownames(scRNAseqData));
   
