@@ -27,8 +27,8 @@ gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr
 scRNAseqData = readRDS(gzcon(url('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'))); #load example scRNA-seq matrix
 es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
-# get results
-es.max
+# View results, cell-type by cell matrix. See the complete example below
+View(es.max)
 
 ```
 
