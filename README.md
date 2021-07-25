@@ -125,6 +125,31 @@ sessionInfo();
 ```
 
 <br><br>
+<br>
+
+
+In addition, if the tissue type of dataset is unknown, ScType provides automated guessing of a tissue type.
+
+```R
+# load auto-detection function
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/auto_detect_tissue_type.R")
+
+# guess cell type
+tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE)       
+```
+<br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figDB.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
+</p>
+<br>
+
+```R
+cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
+                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
+                      marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
+cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
+```
+
 
 For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
 
