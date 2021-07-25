@@ -18,14 +18,14 @@
 
 # load libraries and functions
 lapply(c("dplyr","Seurat","HGNChelper"), library, character.only = T)
-source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
-source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R"); source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
 
 # get cell-type-specific gene sets from our in-built database (DB)
 gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
 
 # assign cell types
-cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+scRNAseqData = readRDS('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'); #load example scRNA-seq matrix
+cL_resutls = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # get results
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1) 
@@ -108,14 +108,8 @@ Finally, let's assign cell types to each cluster:
 <br>
 
 ```R
-es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
+cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
                       gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
-                      
-# merge scores by cluster
-cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
-    es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
-    head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
-}))
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
 
