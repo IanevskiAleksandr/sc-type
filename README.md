@@ -139,7 +139,7 @@ tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbm
 ```
 <br>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figTT.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/figTT.PNG" style="width: 75%; height: 75%"  height="75%" width="75%" />
 </p>
 <br>
 
