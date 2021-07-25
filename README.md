@@ -128,7 +128,7 @@ sessionInfo();
 <br>
 
 
-In addition, if the tissue type of dataset is unknown, ScType provides automated guessing of a tissue type.
+In addition, if the tissue type of input dataset is unknown, ScType provides automated guessing of a tissue type.
 
 ```R
 # load auto-detection function
