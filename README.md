@@ -153,7 +153,7 @@ sessionInfo();
 [1] HGNChelper_0.8.1        SeuratObject_4.0.2      Seurat_4.0.3     dplyr_1.0.6            
 ```
 
-<br><br>
+<br>
 
 ### Automatically detect a tissue type of the dataset
 <div id="detecttissue">In addition, if the tissue type of input dataset is unknown, ScType provides automated guessing of a tissue type.</div>
@@ -174,7 +174,7 @@ The highest summary score represents the most probable tissue type.
 
 
 <br>
-
+<br>
 ## Contact information
 For any questions please contact **Aleksandr Ianevski** (aleksandr.ianevski@helsinki.fi)
 
