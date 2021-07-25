@@ -53,6 +53,7 @@ DimPlot(pbmc, reduction = "umap")
 <p align="center">
   <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png" />
 </p>
+
 <br><br>
 Now, let's <b>automatically assign cell types using ScType</b>. For that, we first load 2 additional ScType functions:
 <br>
@@ -68,6 +69,7 @@ source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sct
 Next, let's prepare gene sets from the input cell marker file. By default, we use our in-built cell marker DB, however, feel free to use your own data.
 Just prepare an input XLSX file in the same format as <a href="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx">our DB file</a>. <i>DB file should contain four columns (tissueType - tissue type, cellName - cell type, geneSymbolmore1 - positive marker genes,	geneSymbolmore2 - marker genes not expected to be expressed by a cell type)</i>
 <br><br>In addition, provide a tissue type your data belongs to:<br>
+<br>
 
 ```R
 # DB file
