@@ -84,6 +84,7 @@ gs_list = gene_sets_prepare(db_, tissue)
 <br>
 Finally, let's assign cell types to each cluster:
 <br>
+<br>
 
 ```R
 cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
@@ -94,6 +95,7 @@ cL_resutls %>% group_by(cluster) %>% top_n(n = 1)
 
 <br>
 We can also overlay the identified cell types on UMAP plot:
+<br>
 <br>
 
 ```R
