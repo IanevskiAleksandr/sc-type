@@ -25,8 +25,7 @@ source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sct
 gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
 
 # assign cell types
-cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE,  gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
-                      marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
+cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # get results
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1) 
@@ -110,8 +109,7 @@ Finally, let's assign cell types to each cluster:
 
 ```R
 cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
-                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
-                      marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
+                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
 
