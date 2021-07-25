@@ -26,7 +26,7 @@ pbmc.data <- Read10X(data.dir = "./filtered_gene_bc_matrices/hg19/")
 # Initialize the Seurat object with the raw (non-normalized data).
 pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)
 ```
-
+<br>
 Next, let's normalize and cluster the data.
 
 ```R
@@ -59,7 +59,7 @@ source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gen
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
 
 ```
-
+<br>
 Next, let's prepare gene sets from the input cell marker file. By default, we use our in-built cell marker DB, however, feel free to use your own data.
 Just prepare an input XLSX file in the same format as <a href="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx">our DB file</a>. <i>DB file should contain four columns (tissueType - tissue type, cellName - cell type, geneSymbolmore1 - positive marker genes,	geneSymbolmore2 - marker genes not expected to be expressed by a cell type)</i>
 <br>In addition, provide a tissue type your data belongs to:
