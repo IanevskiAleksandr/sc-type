@@ -12,6 +12,28 @@
 
 <br><br>
 
+## Quick start
+
+```R
+
+# load libraries and functions
+lapply(c("dplyr","Seurat","HGNChelper"), library, character.only = T)
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
+
+# get cell-type-specific gene sets from our in-built database (DB)
+gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
+
+# assign cell types
+cL_resutls = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE,  gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
+                      marker_sensitivity = gs_list$marker_sensitivity, verbose=!0)
+
+# get results
+cL_resutls %>% group_by(cluster) %>% top_n(n = 1) 
+
+```
+
+<br>
 
 ## Cell type annotation example 
 
