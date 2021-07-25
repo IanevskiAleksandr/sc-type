@@ -24,7 +24,7 @@ source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gen
 gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
 
 # assign cell types
-scRNAseqData = readRDS('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'); #load example scRNA-seq matrix
+scRNAseqData = readRDS(gzcon(url('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'))); #load example scRNA-seq matrix
 es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # get results
