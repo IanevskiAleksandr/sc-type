@@ -1,5 +1,5 @@
 
-# ScType: Fully-automated cell identification by means of cell type-specific markers extracted from single-cell RNA-seq data
+# ScType: Fully-automated and ultra-fast cell-type identification using specific marker combinations from single-cell transcriptomic data
 
 **Article**: [https://www.biorxiv.org/content/10.1101/812131v2.full.pdf]
 
