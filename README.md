@@ -29,6 +29,7 @@ pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3
 <br>
 Next, let's normalize and cluster the data.
 <br>
+
 ```R
 # normalize data
 pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
