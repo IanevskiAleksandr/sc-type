@@ -50,7 +50,7 @@ DimPlot(pbmc, reduction = "umap")
 ```
 ![alt text](https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig1.png)
 <br><br>
-Now, let's automatically assign cell types using ScType. For that, we first load 2 additional ScType functions:
+Now, let's <b>automatically assign cell types using ScType</b>. <br>For that, we first load 2 additional ScType functions:
 
 ```R
 # load gene set preparation function
