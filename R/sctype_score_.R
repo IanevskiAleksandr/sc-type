@@ -53,11 +53,6 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
   
   dimnames(es) = list(names(gs), colnames(Z))
   es.max <- es[!apply(is.na(es) | es == "", 1, all),] # remove na rows
-  
-  cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
-    es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
-    head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
-  }))
-  
-  cL_resutls
+ 
+  es.max
 }
