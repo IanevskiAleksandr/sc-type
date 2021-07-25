@@ -12,6 +12,9 @@
 
 sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2, marker_sensitivity, ...){
   
+  # convert gene names to Uppercase
+  rownames(scRNAseqData) = toupper(rownames(scRNAseqData));
+  
   # subselect genes only found in data
   names_gs_cp = names(gs); names_gs_2_cp = names(gs2);
   gs = lapply(1:length(gs), function(d_){ 
