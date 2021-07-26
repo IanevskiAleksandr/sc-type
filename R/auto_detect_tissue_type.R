@@ -18,9 +18,15 @@ auto_detect_tissue_type <- function(path_to_db_file, scRNAseqData, scaled, ...){
     # prepare gene sets
     gs_list = gene_sets_prepare(path_to_db_file, tissue);
     
-    cL_resutls = sctype_score(scRNAseqData = scRNAseqData, scaled = scaled, 
-                              gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
-                              marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
+    es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = scaled, 
+                            gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
+                            marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
+  
+    cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
+      es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
+      head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
+    }))
+                          
     dt_out = cL_resutls %>% group_by(cluster) %>% top_n(n = 1)
     
     # return mean score for tissue
