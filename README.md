@@ -121,7 +121,7 @@ cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), fun
 }))
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
-Please note that sctype_score function <i>(used above)</i> accepts both positive and negative markers through gs and gs2 arguments. In case, there are no negative markers <i>(i.e. markers providing evidence against a cell being of specific cell type)</i> just set gs2 argument to NULL <i>(i.e. gs2 = NULL)</i>.
+<span id="negativemarkers">Please note that sctype_score function <i>(used above)</i> accepts both positive and negative markers through gs and gs2 arguments. In case, there are no negative markers <i>(i.e. markers providing evidence against a cell being of specific cell type)</i> just set gs2 argument to NULL <i>(i.e. gs2 = NULL)</i></span>.
 
 <br>
 We can also overlay the identified cell types on UMAP plot:
