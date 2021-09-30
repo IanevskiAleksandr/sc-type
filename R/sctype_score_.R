@@ -29,7 +29,7 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
   cell_markers_genes_score = marker_sensitivity[marker_sensitivity$gene_ %in% unique(unlist(gs)),]
   
   # z-scale if not
-  if(!scaled) Z <- t(scale(t(Z))) else Z <- scRNAseqData
+  if(!scaled) Z <- t(scale(t(scRNAseqData))) else Z <- scRNAseqData
   
   # multiple by marker sensitivity
   for(jj in 1:nrow(cell_markers_genes_score)){
