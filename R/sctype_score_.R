@@ -9,7 +9,7 @@
 # @params: gs - list of gene sets positively expressed in the cell type 
 # @params: gs2 - list of gene sets negatively expressed in the cell type (NULL if not applicable)
 
-sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
+sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, gene_names_to_uppercase = !0, ...){
   
   # marker sensitivity
   marker_stat = sort(table(unlist(gs)), decreasing = T); 
@@ -17,7 +17,9 @@ sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, ...){
                                       gene_ = names(marker_stat), stringsAsFactors = !1)
 
   # convert gene names to Uppercase
-  rownames(scRNAseqData) = toupper(rownames(scRNAseqData));
+  if(gene_names_to_uppercase){
+    rownames(scRNAseqData) = toupper(rownames(scRNAseqData));
+  }
   
   # subselect genes only found in data
   names_gs_cp = names(gs); names_gs_2_cp = names(gs2);
