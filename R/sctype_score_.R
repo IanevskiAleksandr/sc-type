@@ -7,7 +7,7 @@
 # @params: scRNAseqData - input scRNA-seq matrix (rownames - genes, column names - cells), 
 # @params: scale - indicates whether the matrix is scaled (TRUE by default)
 # @params: gs - list of gene sets positively expressed in the cell type 
-# @params: gs2 - list of gene sets negatively expressed in the cell type (NULL if not applicable)
+# @params: gs2 - list of gene sets that should not be expressed in the cell type (NULL if not applicable)
 
 sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, gene_names_to_uppercase = !0, ...){
   
