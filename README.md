@@ -117,7 +117,7 @@ es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE,
 # merge by cluster
 cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
     es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
-    head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
+    head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl, ncells = sum(pbmc@meta.data$seurat_clusters==cl)), 10)
 }))
 cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
 ```
