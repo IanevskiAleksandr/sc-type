@@ -119,7 +119,11 @@ cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), fun
     es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
     head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl, ncells = sum(pbmc@meta.data$seurat_clusters==cl)), 10)
 }))
-cL_resutls %>% group_by(cluster) %>% top_n(n = 1)                
+sctype_scores = cL_resutls %>% group_by(cluster) %>% top_n(n = 1, wt = scores)  
+
+# set low ScType score clusters as "unknown"
+sctype_scores$type[as.numeric(as.character(sctype_scores$scores)) < sctype_scores$ncells/4]
+print(sctype_scores$type)
 ```
 <span id="negativemarkers">Please note that sctype_score function <i>(used above)</i> accepts both positive and negative markers through gs and gs2 arguments. In case, there are no negative markers <i>(i.e. markers providing evidence against a cell being of specific cell type)</i> just set gs2 argument to NULL <i>(i.e. gs2 = NULL)</i></span>.
 
