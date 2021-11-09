@@ -121,7 +121,7 @@ cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), fun
 }))
 sctype_scores = cL_resutls %>% group_by(cluster) %>% top_n(n = 1, wt = scores)  
 
-# set low ScType score clusters as "unknown"
+# set low-confident (low ScType score) clusters to "unknown"
 sctype_scores$type[as.numeric(as.character(sctype_scores$scores)) < sctype_scores$ncells/4] = "Unknown"
 print(sctype_scores[,1:3])
 ```
