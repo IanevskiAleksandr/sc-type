@@ -181,7 +181,7 @@ scater::multiplot(DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, 
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" style="width: 80%; height: 80%"  height="80%" width="80%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" />
 </p>
 
 <br><br>
