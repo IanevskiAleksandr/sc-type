@@ -148,7 +148,7 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 </p>
 
 <br><br>
-In addition, one can visualize a bubble plot showing all the cell types that were considered by ScType for cluster annotation. The grey bubbles correspond to each cluster (the bigger, the more cell in the cluster), while the inner bubbles correspond to considered cell types for the cluster, with the biggest bubble corresponding to the assigned cell type.
+In addition, one can visualize a bubble plot showing all the cell types that were considered by ScType for cluster annotation. The inner (grey) bubbles correspond to each cluster <i>(the bigger bubble, the more cell in the cluster)</i>, while the inner bubbles correspond to considered cell types for the cluster, with the biggest bubble corresponding to the assigned cell type.
 <br>
 <br>
 
