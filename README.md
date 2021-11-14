@@ -179,7 +179,7 @@ ggraph(mygraph, layout = 'circlepack', weight=I(ncells)) +
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" style="width: 60%; height: 60%"  height="60%" width="60%" />
 </p>
 
 <br><br>
