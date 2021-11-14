@@ -157,7 +157,7 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 lapply(c("ggraph","igraph","tidyverse", "data.tree"), library, character.only = T)
 
 # prepare edges
-edges = cL_resutls; edges$type = paste0(edges$type,"_",edges$cluster); edges$cluster = paste0("cluster ", edges$cluster); edges = edges[,c("cluster", "type")]; colnames(edges) = c("from", "to"); rownames(edges) <- NULL
+cL_resutls=cL_resutls[order(cL_resutls$cluster),]; edges = cL_resutls; edges$type = paste0(edges$type,"_",edges$cluster); edges$cluster = paste0("cluster ", edges$cluster); edges = edges[,c("cluster", "type")]; colnames(edges) = c("from", "to"); rownames(edges) <- NULL
 
 # prepare nodes
 nodes_lvl1 = sctype_scores[,c("cluster", "ncells")]; nodes_lvl1$cluster = paste0("cluster ", nodes_lvl1$cluster); nodes_lvl1$Colour = "#f1f1ef"; nodes_lvl1$ord = 1; nodes_lvl1$realname = nodes_lvl1$cluster; nodes_lvl1 = as.data.frame(nodes_lvl1); nodes_lvl2 = c(); 
@@ -172,14 +172,16 @@ nodes$shortName[is.na(nodes$shortName)] = nodes$realname[is.na(nodes$shortName)]
 mygraph <- graph_from_data_frame(edges, vertices=nodes)
 
 # Make the graph
-ggraph(mygraph, layout = 'circlepack', weight=I(ncells)) + 
+gggr<- ggraph(mygraph, layout = 'circlepack', weight=I(ncells)) + 
   geom_node_circle(aes(filter=ord==1,fill=I("#F5F5F5"), colour=I("#D3D3D3")), alpha=0.9) + geom_node_circle(aes(filter=ord==2,fill=I(Colour), colour=I("#D3D3D3")), alpha=0.9) +
   theme_void() + geom_node_text(aes(filter=ord==2, label=shortName, colour=I("#ffffff"), fill="white", repel = !1, parse = T, size = I(log(ncells,25)*1.5)))+ geom_node_label(aes(filter=ord==1,  label=shortName, colour=I("#000000"), size = I(3), fill="white", parse = T), repel = !0, segment.linetype="dotted")
+  
+scater::multiplot(DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, cols = ccolss), gggr, cols = 2)
 
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" style="width: 50%; height: 50%"  height="50%" width="50%" />
+  <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig3.png" style="width: 80%; height: 80%"  height="80%" width="80%" />
 </p>
 
 <br><br>
