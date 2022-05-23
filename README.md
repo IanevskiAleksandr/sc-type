@@ -1,7 +1,7 @@
 
 # ScType: Fully-automated and ultra-fast cell-type identification using specific marker combinations from single-cell transcriptomic data
 
-**Article**: [https://www.biorxiv.org/content/10.1101/812131v2.full.pdf]
+**Article**: [https://doi.org/10.1038/s41467-022-28803-w]
 
 <p style="text-align:justify;"> <b>ScType</b> a computational method for automated selection of marker genes based merely on scRNA-seq data. The open-source portal (<a href="//sctype.app">http://sctype.app</a>) provides an interactive web-implementation of the method.</p>
 
