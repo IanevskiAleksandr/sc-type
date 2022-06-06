@@ -116,7 +116,7 @@ es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE,
 
 # NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. 
 # In case Seurat is used, it is either pbmc[["RNA"]]@scale.data (default), pbmc[["SCT"]]@scale.data, in case sctransform is used for normalization,
-# or pbmc[["integrated"]]@scale.data, in case a joint analysis of multiple single-cell datasets is perfromed.
+# or pbmc[["integrated"]]@scale.data, in case a joint analysis of multiple single-cell datasets is performed.
 
 # merge by cluster
 cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
