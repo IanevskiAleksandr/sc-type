@@ -11,6 +11,15 @@
 
 sctype_score <- function(scRNAseqData, scaled = !0, gs, gs2 = NULL, gene_names_to_uppercase = !0, ...){
   
+  # check input matrix
+  if(!is.matrix(scRNAseqData)){
+    warning("scRNAseqData doesn't seem to be a matrix")
+  } else {
+    if(sum(dim(scRNAseqData))==0){
+       warning("The dimension of input scRNAseqData matrix equals to 0, is it an empty matrix?")
+    }
+  }
+  
   # marker sensitivity
   marker_stat = sort(table(unlist(gs)), decreasing = T); 
   marker_sensitivity = data.frame(score_marker_sensitivity = scales::rescale(as.numeric(marker_stat), to = c(0,1), from = c(length(gs),1)),
