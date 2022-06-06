@@ -112,7 +112,10 @@ Finally, let's assign cell types to each cluster:
 ```R
 # get cell-type by cell matrix
 es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
-                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative) 
+
+# NOTE: scRNAseqData - input scRNA-seq matrix. In case Seurat is used, it is either pbmc[["RNA"]]@scale.data (default),
+# pbmc[["SCT"]]@scale.data, in case sctransform is used for normalization, or pbmc[["integrated"]]@scale.data, in case a joint analysis of multiple single-cell datasets is perfromed.
 
 # merge by cluster
 cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
