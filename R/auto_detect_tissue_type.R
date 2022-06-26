@@ -5,26 +5,28 @@
 # auto_detect_tissue_type: automatically detect a tissue type of the dataset
 #
 # @params: path_to_db_file - DB file with cell types
-# @params: scRNAseqData - input scRNA-seq matrix (rownames - genes, column names - cells), 
+# @params: seuratObject - The Seurat Object from wich to extract the input scRNA-seq matrix (rownames - genes, column names - cells), 
 # @params: scale - indicates whether the matrix is scaled (TRUE by default)
+# @params: assay - e.g. RNA, SCT, integrated
 
-auto_detect_tissue_type <- function(path_to_db_file, scRNAseqData, scaled, ...){
+auto_detect_tissue_type <- function(path_to_db_file, seuratObject, scaled, assay = "RNA", ...){
   
   # get all tissue types in DB
-  db_read = openxlsx::read.xlsx(path_to_db_file); tissues_ = unique(db_read$tissueType); result_ = c()
-  
-  for(tissue in tissues_){ print(paste0("Checking...", tissue));
+    db_read = openxlsx::read.xlsx(path_to_db_file); tissues_ = unique(db_read$tissueType); result_ = c()
     
+    for(tissue in tissues_){ print(paste0("Checking...", tissue));
+        
     # prepare gene sets
     gs_list = gene_sets_prepare(path_to_db_file, tissue);
     
-    es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = scaled, 
-                            gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
-                            marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
+    es.max = sctype_score(scRNAseqData = seuratObject[[assay]]@scale.data, scaled = scaled, 
+                          gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
+                          marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
   
-    cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
-      es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
-      head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
+    cL_resutls = do.call("rbind", lapply(unique(seuratObject@meta.data$seurat_clusters), function(cl){
+      
+        es.max.cl = sort(rowSums(es.max[ ,rownames(seuratObject@meta.data[seuratObject@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
+        head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl), 10)
     }))
                           
     dt_out = cL_resutls %>% group_by(cluster) %>% top_n(n = 1)
