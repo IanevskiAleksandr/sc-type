@@ -21,9 +21,9 @@ auto_detect_tissue_type <- function(path_to_db_file, seuratObject, scaled, assay
     
     # prepare obj
     if(scaled){
-      obj = seuratObject[[assay]]@scale.data
+      obj = as.matrix(seuratObject[[assay]]@scale.data)
     } else {
-      obj = seuratObject[[assay]]@counts
+      obj = as.matrix(seuratObject[[assay]]@counts)
     }
                             
     es.max = sctype_score(scRNAseqData = obj, scaled = scaled, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
