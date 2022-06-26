@@ -205,7 +205,7 @@ sessionInfo();
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/auto_detect_tissue_type.R")
 
 # guess a tissue type
-tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE)       
+tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, seuratObject = pbmc, assay = "RNA")            
 ```
 <br>
 <p align="center">
