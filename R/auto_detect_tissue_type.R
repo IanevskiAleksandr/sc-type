@@ -19,8 +19,14 @@ auto_detect_tissue_type <- function(path_to_db_file, seuratObject, scaled, assay
     # prepare gene sets
     gs_list = gene_sets_prepare(path_to_db_file, tissue);
     
-    es.max = sctype_score(scRNAseqData = seuratObject[[assay]]@scale.data, scaled = scaled, 
-                          gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
+    # prepare obj
+    if(scaled){
+      obj = seuratObject[[assay]]@scale.data
+    } else {
+      obj = seuratObject[[assay]]@counts
+    }
+                            
+    es.max = sctype_score(scRNAseqData = obj, scaled = scaled, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
                           marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
   
     cL_resutls = do.call("rbind", lapply(unique(seuratObject@meta.data$seurat_clusters), function(cl){
