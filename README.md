@@ -203,9 +203,10 @@ sessionInfo();
 ```R
 # load auto-detection function
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/auto_detect_tissue_type.R")
+db_ = "https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx";
 
 # guess a tissue type
-tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, seuratObject = pbmc, assay = "RNA")            
+tissue_guess = auto_detect_tissue_type(path_to_db_file = db_, seuratObject = pbmc, scaled = TRUE, assay = "RNA")            
 ```
 <br>
 <p align="center">
