@@ -97,7 +97,7 @@ Just prepare an input XLSX file in the same format as <a href="https://raw.githu
 ```R
 # DB file
 db_ = "https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx";
-tissue = "Immune system" # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
+tissue = "Immune system" # e.g. Immune system,Pancreas,Liver,Eye,Kidney,Brain,Lung,Adrenal,Heart,Intestine,Muscle,Placenta,Spleen,Stomach,Thymus 
 
 # prepare gene sets
 gs_list = gene_sets_prepare(db_, tissue)
