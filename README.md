@@ -17,7 +17,7 @@
 ```R
 
 # load libraries and functions
-lapply(c("dplyr","Seurat","HGNChelper"), library, character.only = T)
+lapply(c("dplyr","Seurat","HGNChelper","openxlsx"), library, character.only = T)
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R"); source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
 
 # get cell-type-specific gene sets from our in-built database (DB)
