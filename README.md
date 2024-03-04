@@ -33,12 +33,12 @@ View(es.max)
 
 ```
 ## Quicker start
-If you already have a processed seurat object, you can try the wrapper function. Users can provide a custom marker set using the **custom_marker_file** tag. In this case, we use the default scTypeDB but the tag is shown for clarity. Results are saved in the seurat metadata under **sctype_classification**.
+If you already have a processed seurat object, you can try the wrapper function. Users can provide a custom marker set using the **custom_marker_file** tag. In this case, we use the default scTypeDB but the tag is shown for clarity. Results are saved in the seurat metadata under **customclassif**.
 
 ```R
 ## readRDS of your sample before
 # sample <- readRDS("/absolute/path/sample.RDS")
-sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx")
+sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="customclassif")
 
 ```
 <br>
