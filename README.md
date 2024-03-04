@@ -125,8 +125,8 @@ package_type <- substr(packageVersion("Seurat"), 1, 1)
 
 es.max <- ifelse(
     package_type == 5,
-    sctype_score(scRNAseqData = seurat_object[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative),
-    sctype_score(scRNAseqData = seurat_object[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative)
+    sctype_score(scRNAseqData = pbmc[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative),
+    sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative)
 )
 
 # NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. 
