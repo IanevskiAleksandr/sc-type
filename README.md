@@ -20,18 +20,27 @@
 lapply(c("dplyr","Seurat","HGNChelper","openxlsx"), library, character.only = T)
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R"); source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
 
+
 # get cell-type-specific gene sets from our in-built database (DB)
-gs_list = gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
+gs_list <- gene_sets_prepare("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx", "Immune system") # e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain
 
 # assign cell types
-scRNAseqData = readRDS(gzcon(url('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'))); #load example scRNA-seq matrix
-es.max = sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+scRNAseqData <- readRDS(gzcon(url('https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/exampleData.RDS'))); #load example scRNA-seq matrix
+es.max <- sctype_score(scRNAseqData = scRNAseqData, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # View results, cell-type by cell matrix. See the complete example below
 View(es.max)
 
 ```
+## Quicker start
+If you already have a processed seurat object, you can try the wrapper function. Users can provide a custom marker set using the **custom_marker_file** tag. In this case, we use the default scTypeDB but the tag is shown for clarity. Results are saved in the seurat metadata under **sctype_classification**.
 
+```R
+## readRDS of your sample before
+# sample <- readRDS("/absolute/path/sample.RDS")
+sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx")
+
+```
 <br>
 
 ## Cell type annotation example 
@@ -97,11 +106,11 @@ Just prepare an input XLSX file in the same format as <a href="https://raw.githu
 
 ```R
 # DB file
-db_ = "https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx";
-tissue = "Immune system" # e.g. Immune system,Pancreas,Liver,Eye,Kidney,Brain,Lung,Adrenal,Heart,Intestine,Muscle,Placenta,Spleen,Stomach,Thymus 
+db_ <- "https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx";
+tissue <- "Immune system" # e.g. Immune system,Pancreas,Liver,Eye,Kidney,Brain,Lung,Adrenal,Heart,Intestine,Muscle,Placenta,Spleen,Stomach,Thymus 
 
 # prepare gene sets
-gs_list = gene_sets_prepare(db_, tissue)
+gs_list <- gene_sets_prepare(db_, tissue)
 
 ```
 
@@ -111,23 +120,28 @@ Finally, let's assign cell types to each cluster:
 <br>
 
 ```R
-# get cell-type by cell matrix
-es.max = sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data, scaled = TRUE, 
-                      gs = gs_list$gs_positive, gs2 = gs_list$gs_negative) 
+# check version of seurat 
+package_type <- substr(packageVersion("Seurat"), 1, 1)
+
+es.max <- ifelse(
+    package_type == 5,
+    sctype_score(scRNAseqData = seurat_object[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative),
+    sctype_score(scRNAseqData = seurat_object[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative)
+)
 
 # NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. 
 # In case Seurat is used, it is either pbmc[["RNA"]]@scale.data (default), pbmc[["SCT"]]@scale.data, in case sctransform is used for normalization,
 # or pbmc[["integrated"]]@scale.data, in case a joint analysis of multiple single-cell datasets is performed.
 
 # merge by cluster
-cL_resutls = do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
+cL_resutls <- do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
     es.max.cl = sort(rowSums(es.max[ ,rownames(pbmc@meta.data[pbmc@meta.data$seurat_clusters==cl, ])]), decreasing = !0)
     head(data.frame(cluster = cl, type = names(es.max.cl), scores = es.max.cl, ncells = sum(pbmc@meta.data$seurat_clusters==cl)), 10)
 }))
-sctype_scores = cL_resutls %>% group_by(cluster) %>% top_n(n = 1, wt = scores)  
+sctype_scores <- cL_resutls %>% group_by(cluster) %>% top_n(n = 1, wt = scores)  
 
 # set low-confident (low ScType score) clusters to "unknown"
-sctype_scores$type[as.numeric(as.character(sctype_scores$scores)) < sctype_scores$ncells/4] = "Unknown"
+sctype_scores$type[as.numeric(as.character(sctype_scores$scores)) < sctype_scores$ncells/4] <- "Unknown"
 print(sctype_scores[,1:3])
 ```
 <span id="negativemarkers">Please note that sctype_score function <i>(used above)</i> accepts both positive and negative markers through gs and gs2 arguments. In case, there are no negative markers <i>(i.e. markers providing evidence against a cell being of specific cell type)</i> just set gs2 argument to NULL <i>(i.e. gs2 = NULL)</i></span>.
@@ -147,6 +161,7 @@ for(j in unique(sctype_scores$cluster)){
 DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')        
 
 ```
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
