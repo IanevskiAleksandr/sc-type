@@ -123,11 +123,11 @@ Finally, let's assign cell types to each cluster:
 # check version of seurat 
 package_type <- substr(packageVersion("Seurat"), 1, 1)
 
-es.max <- ifelse(
-    package_type == 5,
-    sctype_score(scRNAseqData = pbmc[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative),
-    sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive,gs2 = gs_list$gs_negative)
-)
+if (package_type == 5) {
+    es.max <- sctype_score(scRNAseqData = pbmc[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+} else {
+    es.max <- sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+}
 
 # NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. 
 # In case Seurat is used, it is either pbmc[["RNA"]]@scale.data (default), pbmc[["SCT"]]@scale.data, in case sctransform is used for normalization,
