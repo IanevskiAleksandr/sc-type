@@ -162,7 +162,9 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 
 ```
 
-For faster anakysis, users can apply the wrapper function and skip the previous steps. This wrapper function will prepare the gene set, compute sctype scores, overlay annotations on the umap and plot (optional).
+
+To expedite the analysis, users can apply the wrapper function and bypass preceding steps. 
+This wrapper function streamlines the process by preparing the gene set, computing sctype scores, overlaying annotations on the UMAP, and optionally generating the cell annotation plot.
 
 ```R
 source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
