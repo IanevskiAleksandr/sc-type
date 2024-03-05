@@ -162,6 +162,13 @@ DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'custom
 
 ```
 
+For faster anakysis, users can apply the wrapper function and skip the previous steps. This wrapper function will prepare the gene set, compute sctype scores, overlay annotations on the umap and plot (optional).
+
+```R
+source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
+pbmc <- run_sctype(pbmc,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx",name="customclassif",plot=TRUE)
+```
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/fig2.png" style="width: 75%; height: 75%"  height="75%" width="75%" />
