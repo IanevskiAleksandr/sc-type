@@ -33,8 +33,7 @@ View(es.max)
 
 ```
 ## Quicker start
-If you already have a processed seurat object, you can try the wrapper function. Users can provide a custom marker set using the **custom_marker_file** tag. In this case, we use the default scTypeDB but the tag is shown for clarity. Results are saved in the seurat metadata under **customclassif**.
-
+If you've already processed your Seurat object, leverage the wrapper function for further analysis. Users have the flexibility to input a custom marker set via the 'custom_marker_file' tag. While we default to scTypeDB in this scenario, the tag is included in the example for clarity. The resulting analysis is stored within the Seurat metadata under the 'customclassif' column.
 ```R
 ## readRDS of your sample before
 # sample <- readRDS("/absolute/path/sample.RDS")
