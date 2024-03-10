@@ -122,11 +122,12 @@ Finally, let's assign cell types to each cluster:
 
 ```R
 
-# check Seurat package version
-seurat_package_v <- substr(packageVersion("Seurat"), 1, 1); sprintf("Seurat v%s is used", seurat_package_v);
+# check Seurat package version (as scRNA-seq expression matrix extracted differently in Seurat v4 and v5)
+seurat_package_v5 <- isFALSE(data_type %in% names(attributes(seurat_object[[assay]])));
+sprintf("Seurat v%s is used", seurat_package_v);
 
 # extract scaled scRNA-seq matrix
-scRNAseqData_scaled <- if (seurat_package_v == "5") pbmc[["RNA"]]$scale.data else pbmc[["RNA"]]@scale.data
+scRNAseqData_scaled <- if (seurat_package_v5) as.matrix(pbmc[["RNA"]]$scale.data) else as.matrix(pbmc[["RNA"]]@scale.data)
 
 # run ScType
 es.max <- sctype_score(scRNAseqData = scRNAseqData_scaled, scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
