@@ -33,13 +33,13 @@ View(es.max)
 
 ```
 ## Quicker start
-If you've already processed your Seurat object, leverage the wrapper function for further analysis. Users have the flexibility to input a custom marker set via the 'custom_marker_file' tag. While we default to scTypeDB in this scenario, the tag is included in the example for clarity. The resulting analysis is stored within the Seurat metadata under the 'customclassif' column.
+If you've already processed your Seurat object, leverage the wrapper function for further analysis. Users have the flexibility to input a custom marker set via the 'custom_marker_file' tag. While we default to scTypeDB in this scenario, the tag is included in the example for clarity. The resulting analysis is stored within the Seurat metadata under the 'sctype_classification' column.
 ```R
 ## readRDS of your sample before
 # sample <- readRDS("/absolute/path/sample.RDS");
 sample <- pbmc_small # example
 source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
-sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="customclassif")
+sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="sctype_classification")
 
 ```
 <br>
@@ -154,13 +154,13 @@ We can also overlay the identified cell types on UMAP plot:
 <br>
 
 ```R
-pbmc@meta.data$customclassif = ""
+pbmc@meta.data$sctype_classification = ""
 for(j in unique(sctype_scores$cluster)){
   cl_type = sctype_scores[sctype_scores$cluster==j,]; 
-  pbmc@meta.data$customclassif[pbmc@meta.data$seurat_clusters == j] = as.character(cl_type$type[1])
+  pbmc@meta.data$sctype_classification[pbmc@meta.data$seurat_clusters == j] = as.character(cl_type$type[1])
 }
 
-DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'customclassif')        
+DimPlot(pbmc, reduction = "umap", label = TRUE, repel = TRUE, group.by = 'sctype_classification')        
 
 ```
 
@@ -170,7 +170,7 @@ This wrapper function streamlines the process by preparing the gene set, computi
 
 ```R
 source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
-pbmc <- run_sctype(pbmc,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx",name="customclassif",plot=TRUE)
+pbmc <- run_sctype(pbmc,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_full.xlsx",name="sctype_classification",plot=TRUE)
 ```
 
 
