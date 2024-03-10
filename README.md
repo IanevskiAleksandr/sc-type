@@ -38,7 +38,7 @@ If you've already processed your Seurat object, leverage the wrapper function fo
 ## readRDS of your sample before
 # sample <- readRDS("/absolute/path/sample.RDS");
 sample <- pbmc_small # example
-source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
+source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_wrapper.R"); 
 sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="sctype_classification")
 
 ```
