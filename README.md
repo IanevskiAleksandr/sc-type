@@ -121,18 +121,19 @@ Finally, let's assign cell types to each cluster:
 <br>
 
 ```R
-# check version of seurat 
-package_type <- substr(packageVersion("Seurat"), 1, 1)
 
-if (package_type == 5) {
-    es.max <- sctype_score(scRNAseqData = pbmc[["RNA"]]$scale.data,scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
-} else {
-    es.max <- sctype_score(scRNAseqData = pbmc[["RNA"]]@scale.data,scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
-}
+# check Seurat package version
+seurat_package_v <- substr(packageVersion("Seurat"), 1, 1); sprintf("Seurat v%s is used", seurat_package_v);
 
-# NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. 
-# In case Seurat is used, it is either pbmc[["RNA"]]@scale.data (default), pbmc[["SCT"]]@scale.data, in case sctransform is used for normalization,
-# or pbmc[["integrated"]]@scale.data, in case a joint analysis of multiple single-cell datasets is performed.
+# extract scaled scRNA-seq matrix
+scRNAseqData_scaled <- if (seurat_package_v == "5") pbmc[["RNA"]]$scale.data else pbmc[["RNA"]]@scale.data
+
+# run ScType
+es.max <- sctype_score(scRNAseqData = scRNAseqData_scaled, scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+
+# NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. For raw (unscaled) count matrix set scaled = FALSE
+# When using Seurat, we use "RNA" slot with 'scale.data' by default. Please change "RNA" to "SCT" for sctransform-normalized data,
+# or to "integrated" for joint dataset analysis. To apply sctype with unscaled data, use e.g. pbmc[["RNA"]]$counts or pbmc[["RNA"]]@counts, with scaled set to FALSE.
 
 # merge by cluster
 cL_resutls <- do.call("rbind", lapply(unique(pbmc@meta.data$seurat_clusters), function(cl){
