@@ -72,7 +72,7 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", c
     
     if(package_type==5){
         print("Running with Seurat v5")
-        es.max = sctype_score(scRNAseqData = seurat_object[[assay]]$scale.data,
+        es.max = sctype_score(scRNAseqData = slot(seurat_object[[assay]], 'scale.data'),
                               scaled = TRUE,gs = gs_list$gs_positive, 
                               gs2 = gs_list$gs_negative)
     }
