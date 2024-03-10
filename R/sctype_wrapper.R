@@ -41,7 +41,7 @@ sctype_source <- function(){
 #' 
 
 
-run_sctype <- function(seurat_object, known_tissue_type = NULL, custom_marker_file = NULL, plot = FALSE, name = "sctype_classification") {
+run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", custom_marker_file = NULL, plot = FALSE, name = "sctype_classification") {
     db_=sctype_source()
     # Check for missing arguments
     if (is.null(seurat_object)) {
@@ -58,7 +58,7 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, custom_marker_fi
     if (is.null(known_tissue_type)) {
         tissue_type = auto_detect_tissue_type(path_to_db_file = custom_marker_file, 
                                               seuratObject = seurat_object, 
-                                              scaled = TRUE, assay = "RNA")
+                                              scaled = TRUE, assay = assay)
         rownames(tissue_type)=NULL
         tissue_type=tissue_type$tissue[1]
     } else {
@@ -71,15 +71,15 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, custom_marker_fi
     package_type=substr(packageVersion("Seurat"), 1, 1)
     
     if(package_type==5){
-        print("Running with Seuratv5")
-        es.max = sctype_score(scRNAseqData = seurat_object[["RNA"]]$scale.data,
+        print("Running with Seurat v5")
+        es.max = sctype_score(scRNAseqData = seurat_object[[assay]]$scale.data,
                               scaled = TRUE,gs = gs_list$gs_positive, 
                               gs2 = gs_list$gs_negative)
     }
     else{
         # Calculate scType scores
-        print("Running with Seuratv4")
-        es.max = sctype_score(scRNAseqData = seurat_object[["RNA"]]@scale.data,
+        print("Running with Seurat v4")
+        es.max = sctype_score(scRNAseqData = seurat_object[[assay]]@scale.data,
                               scaled = TRUE,gs = gs_list$gs_positive, 
                               gs2 = gs_list$gs_negative)
     }
