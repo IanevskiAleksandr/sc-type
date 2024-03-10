@@ -17,23 +17,15 @@ auto_detect_tissue_type <- function(path_to_db_file, seuratObject, scaled, assay
         
         # prepare gene sets
         gs_list = gene_sets_prepare(path_to_db_file, tissue);
-        
-        package_type=substr(packageVersion("Seurat"), 1, 1)
-        if (package_type==5){
-            if(scaled){
-                obj = as.matrix(seuratObject[[assay]]$scale.data)
-            } else {
-                obj = as.matrix(seuratObject[[assay]]$counts)
-            }
+
+        # check Seurat version
+        package_type <- substr(packageVersion("Seurat"), 1, 1)
+        data_type <- if (scaled) "scale.data" else "counts"
+        obj <- if (package_type == "5") {
+          as.matrix(seuratObject[[assay]]$data_type)
+        } else {
+          as.matrix(seuratObject[[assay]]@data_type)
         }
-        else{
-            if(scaled){
-                obj = as.matrix(seuratObject[[assay]]@scale.data)
-            } else {
-                obj = as.matrix(seuratObject[[assay]]@counts)
-            }
-        }
-        
         
         es.max = sctype_score(scRNAseqData = obj, scaled = scaled, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative, 
                               marker_sensitivity = gs_list$marker_sensitivity, verbose=!0);
