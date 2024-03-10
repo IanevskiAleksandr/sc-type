@@ -41,7 +41,7 @@ sctype_source <- function(){
 #' 
 
 
-run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", custom_marker_file = NULL, plot = FALSE, name = "sctype_classification") {
+run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", scaled = TRUE, custom_marker_file = NULL, plot = FALSE, name = "sctype_classification") {
     db_=sctype_source()
     # Check for missing arguments
     if (is.null(seurat_object)) {
@@ -56,9 +56,10 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", c
     }
     # Auto-detect tissue type if not provided
     if (is.null(known_tissue_type)) {
+        print("Guessing tissue type: \n");
         tissue_type = auto_detect_tissue_type(path_to_db_file = custom_marker_file, 
                                               seuratObject = seurat_object, 
-                                              scaled = TRUE, assay = assay)
+                                              scaled = scaled, assay = assay)
         rownames(tissue_type)=NULL
         tissue_type=tissue_type$tissue[1]
     } else {
@@ -68,18 +69,19 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", c
     # Prepare gene sets
     gs_list = gene_sets_prepare(custom_marker_file, tissue_type)
     
-    package_type=substr(packageVersion("Seurat"), 1, 1)
+    package_type <- substr(packageVersion("Seurat"), 1, 1)
+    data_type <- if (scaled) "scale.data" else "counts"  
     
     if(package_type==5){
         print("Running with Seurat v5")
-        es.max = sctype_score(scRNAseqData = seurat_object[[assay]]$scale.data,
+        es.max = sctype_score(scRNAseqData = seuratObject[[assay]]$data_type,
                               scaled = TRUE,gs = gs_list$gs_positive, 
                               gs2 = gs_list$gs_negative)
     }
     else{
         # Calculate scType scores
         print("Running with Seurat v4")
-        es.max = sctype_score(scRNAseqData = seurat_object[[assay]]@scale.data,
+        es.max = sctype_score(scRNAseqData = seuratObject[[assay]]@data_type,
                               scaled = TRUE,gs = gs_list$gs_positive, 
                               gs2 = gs_list$gs_negative)
     }
