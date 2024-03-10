@@ -36,7 +36,8 @@ View(es.max)
 If you've already processed your Seurat object, leverage the wrapper function for further analysis. Users have the flexibility to input a custom marker set via the 'custom_marker_file' tag. While we default to scTypeDB in this scenario, the tag is included in the example for clarity. The resulting analysis is stored within the Seurat metadata under the 'customclassif' column.
 ```R
 ## readRDS of your sample before
-# sample <- readRDS("/absolute/path/sample.RDS")
+# sample <- readRDS("/absolute/path/sample.RDS");
+sample <- pbmc_small # example
 source("https://raw.githubusercontent.com/kris-nader/sc-type/master/R/sctype_wrapper.R"); 
 sample <- run_sctype(sample,known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="customclassif")
 
