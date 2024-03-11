@@ -122,7 +122,7 @@ Finally, let's assign cell types to each cluster:
 
 ```R
 
-# check Seurat package version (as scRNA-seq expression matrix extracted differently in Seurat v4 and v5)
+# check Seurat version (scRNA-seq matrix extracted differently in Seurat v4/v5)
 seurat_package_v5 <- isFALSE(data_type %in% names(attributes(seurat_object[[assay]])));
 sprintf("Seurat v%s is used", seurat_package_v);
 
