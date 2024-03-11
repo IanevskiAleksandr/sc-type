@@ -129,7 +129,7 @@ sprintf("Seurat v%s is used", seurat_package_v);
 scRNAseqData_scaled <- if (seurat_package_v5) as.matrix(pbmc[["RNA"]]$scale.data) else as.matrix(pbmc[["RNA"]]@scale.data)
 
 # run ScType
-es.max <- sctype_score(scRNAseqData = scRNAseqData_scaled, scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+es.max <- sctype_score(scRNAseqData = scRNAseqData_scaled, scaled = TRUE, gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
 
 # NOTE: scRNAseqData parameter should correspond to your input scRNA-seq matrix. For raw (unscaled) count matrix set scaled = FALSE
 # When using Seurat, we use "RNA" slot with 'scale.data' by default. Please change "RNA" to "SCT" for sctransform-normalized data,
