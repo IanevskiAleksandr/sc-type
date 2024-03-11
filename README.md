@@ -42,6 +42,8 @@ If you've already processed your Seurat object, leverage the wrapper function fo
 source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_wrapper.R"); 
 sample <- run_sctype(sample, assay = "RNA", scaled = TRUE, known_tissue_type="Immune system",custom_marker_file="https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/ScTypeDB_short.xlsx",name="sctype_classification")
 
+# See the complete example below
+
 ```
 <br>
 
