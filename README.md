@@ -126,7 +126,7 @@ Finally, let's assign cell types to each cluster:
 ```R
 
 # check Seurat object version (scRNA-seq matrix extracted differently in Seurat v4/v5)
-seurat_package_v5 <- isFALSE('counts' %in% names(attributes(seurat_object[[assay]])));
+seurat_package_v5 <- isFALSE('counts' %in% names(attributes(pbmc[["RNA"]])));
 print(sprintf("Seurat object %s is used", ifelse(seurat_package_v5, "v5", "v4")))
 
 # extract scaled scRNA-seq matrix
