@@ -68,9 +68,9 @@ run_sctype <- function(seurat_object, known_tissue_type = NULL, assay = "RNA", s
     
     # Prepare gene sets
     gs_list = gene_sets_prepare(custom_marker_file, tissue_type)
-    
-    package_type <- data_type %in% names(attributes(seurat_object[[assay]]))
+
     data_type <- if (scaled) "scale.data" else "counts"  
+    package_type <- data_type %in% names(attributes(seurat_object[[assay]]))
     
     # Calculate scType scores
     if(package_type){
